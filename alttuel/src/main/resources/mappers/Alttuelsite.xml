@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alttuel.alttuel.alttuelsite.AlttuelsiteDAO">
+   <select id="getAlttuelList" resultType="AlttuelsiteVO">
+      select      sl.boardthumnail as boardthumnail, sl.boardtitle as boardtitle,
+                  sl.createdate as createdate, sl.boarddetailpath as boarddetailpath,
+                  si.name as sitename, si.domain as sitedomain,
+                  si.boardpath as siteboardpath
+      FROM        sitelist as sl
+      INNER JOIN  siteinfo as si ON si.id = sl.site
+      ORDER BY    sl.createdate desc
+      LIMIT       ${size}
+      OFFSET      ${page}
+      
+   </select>
+
+
+</mapper>
