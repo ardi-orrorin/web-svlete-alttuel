@@ -14,15 +14,14 @@
 {:then data}
   {#each data.data as item}
     <div class="box">
-      <Mainitem {item} />
+      <div>
+        <Mainitem {item} />
+      </div>
     </div>
   {/each}
 {/await}
 
 <style>
-  .header {
-    height: 100px;
-  }
   .box {
     display: flex;
     justify-content: center;

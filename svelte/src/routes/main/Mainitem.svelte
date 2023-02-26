@@ -32,15 +32,14 @@
   .date {
     font-size: smaller;
   }
-  .title {
+  a {
     text-decoration: none;
-
+  }
+  .title {
     color: black;
     font-size: medium;
   }
-  .title:hover {
-    text-decoration: none;
-  }
+
   .label {
     padding-left: 5px;
     padding-right: 5px;

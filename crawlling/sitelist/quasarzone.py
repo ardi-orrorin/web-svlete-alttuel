@@ -17,14 +17,17 @@ async def quasarzone() -> list:
     result = []
 
     for i in list1:
-        itemlist = {}
-        itemlist['sitename'] = sitename
-        itemlist['sitedomain'] = sitedomain
-        itemlist['siteboardpath'] = siteboardpath
-        itemlist['boarddetailpath'] = i.div.a.attrs['href']
-        itemlist['boardthumnail'] = i.div.a.img.attrs['src']
-        itemlist['boardtitle'] = i.select_one(
-            'span.ellipsis-with-reply-cnt').text
-        result.append(itemlist)
+        try:
+            itemlist = {}
+            itemlist['sitename'] = sitename
+            itemlist['sitedomain'] = sitedomain
+            itemlist['siteboardpath'] = siteboardpath
+            itemlist['boarddetailpath'] = i.div.a.attrs['href']
+            itemlist['boardthumnail'] = i.div.a.img.attrs['src']
+            itemlist['boardtitle'] = i.select_one(
+                'span.ellipsis-with-reply-cnt').text
+            result.append(itemlist)
+        except AttributeError:
+            pass
 
     return result
