@@ -2,9 +2,13 @@
   import Sitelist from "./sitelist/Sitelist.svelte";
   import Routes from "svelte-spa-router";
   import Submenu from "../menu/Submenu.svelte";
+  import Newsitelist from "./sitelist/Newsitelist.svelte";
+  import { issubmenu } from "../../Store";
 
   const routes = {
     "/admin/sitelist": Sitelist,
+    "/admin/sitelist/new": Newsitelist,
+
     "/admin": Sitelist,
   };
 
@@ -18,9 +22,12 @@
 </script>
 
 <div>
-  <div class="menu">
-    <Submenu {menulist} />
-  </div>
+  {#if $issubmenu}
+    <div class="menu">
+      <Submenu {menulist} />
+    </div>
+  {/if}
+
   <div>
     <Routes {routes} />
   </div>

@@ -10,4 +10,6 @@ public interface SitelistDAO {
     List<SitelistVO> getSitelist(
             @Param("size") Integer size,
             @Param("page") Integer page);
+
+    void newSite(SitelistVO sitellist);
 }

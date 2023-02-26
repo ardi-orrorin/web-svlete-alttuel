@@ -17,4 +17,9 @@ public class SitelistServiceImpl implements SitelistService {
             Integer page) {
         return sitelistDAO.getSitelist(size, page);
     }
+
+    @Override
+    public void newSite(SitelistVO sitelist) {
+        sitelistDAO.newSite(sitelist);
+    }
 }

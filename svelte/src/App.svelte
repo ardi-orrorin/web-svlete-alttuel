@@ -3,20 +3,23 @@
   import Admin from "./routes/admin/Admin.svelte";
   import Main from "./routes/main/Main.svelte";
   import Mainmenu from "./routes/menu/Mainmenu.svelte";
-  import Sitelist from "./routes/admin/sitelist/Sitelist.svelte";
   import "bootstrap/dist/css/bootstrap.min.css";
+  import { ismainmenu } from "./Store";
 
   const routes = {
     "/": Main,
     "/admin": Admin,
     "/admin/:": Admin,
+    "/admin/sitelist/:": Admin,
   };
 </script>
 
 <div>
-  <div class="box menu">
-    <Mainmenu />
-  </div>
+  {#if $ismainmenu}
+    <div class="box menu">
+      <Mainmenu />
+    </div>
+  {/if}
   <div>
     <Routes {routes} />
   </div>

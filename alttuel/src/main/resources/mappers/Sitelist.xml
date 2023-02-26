@@ -9,6 +9,9 @@
       FROM        siteinfo
       ORDER BY    id desc      
    </select>
-
+<insert id="newSite">
+      INSERT INTO siteinfo(name,domain,boardpath,createdate,memo)
+      VALUES      (#{name},#{domain},#{boardpath},CURRENT_TIMESTAMP,#{memo})
+   </insert>
 
 </mapper>
