@@ -3,6 +3,8 @@
   import Admin from "./routes/admin/Admin.svelte";
   import Main from "./routes/main/Main.svelte";
   import Mainmenu from "./routes/menu/Mainmenu.svelte";
+  import Signup from "./routes/account/Signup.svelte";
+  import SignIn from "./routes/account/SignIn.svelte";
   import "bootstrap/dist/css/bootstrap.min.css";
   import { ismainmenu } from "./Store";
 
@@ -11,6 +13,8 @@
     "/admin": Admin,
     "/admin/:": Admin,
     "/admin/sitelist/:": Admin,
+    "/account/signup": Signup,
+    "/account/signin": SignIn,
   };
 </script>
 

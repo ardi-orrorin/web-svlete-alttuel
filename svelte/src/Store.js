@@ -8,3 +8,4 @@ export const serverhost = protocol + "://" + host + ":" + port;
 export const ismainmenu = writable(true);
 export const issubmenu = writable(true);
 export const life = writable(0);
+export const isLogin = writable(false);
