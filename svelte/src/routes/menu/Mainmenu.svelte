@@ -1,11 +1,17 @@
 <script>
   import Mainmenuitem from "./Mainmenuitem.svelte";
+  import { isLogin } from "../../Store";
 
   const menulist = [
     { name: "MAIN", link: "#/" },
     { name: "TEST", link: "link" },
     { name: "TEST", link: "link" },
     { name: "ADMIN", link: "#/admin" },
+  ];
+
+  const menu2list = [
+    { name: "SignIn", link: "#/account/signin" },
+    { name: "SingUp", link: "#/account/signup" },
   ];
 </script>
 
@@ -14,6 +20,9 @@
     {#each menulist as menu}
       <Mainmenuitem name={menu.name} link={menu.link} />
     {/each}
+    {#if isLogin}
+      <Mainmenuitem name={$isLogin ? "LOGOUT" : "Sign_in"} link={$isLogin ? "#/account/signup" : "#/account/signin"} />
+    {/if}
   </div>
 </div>
 
