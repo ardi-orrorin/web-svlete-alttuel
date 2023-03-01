@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class AuthorityVO {
     private Integer id;
-
     private String name;
-    private Integer user;
+    private Integer grade;
 }

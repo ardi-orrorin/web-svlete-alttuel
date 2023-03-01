@@ -19,21 +19,23 @@ export const isLoginerr = () => {
 
 export const isLogincookie = async () => {
   let url = serverhost + "/api/user/logincookie";
-  let data = await axios({ method: "post", url: url, params: { cookie: localStorage.getItem("accessToken") } });
+  let data = await axios({
+    method: "post",
+    url: url,
+    params: { cookie: localStorage.getItem("accessToken") },
+    withCredentials: true,
+  });
 
+  console.log(document.cookie());
   if (data.data) {
-    localStorage.setItem("accessToken", data.data);
     localStorage.setItem("login", "true");
   } else {
     localStorage.setItem("login", "false");
-    localStorage.setItem("accessToken", "");
   }
 
   console.log(localStorage.getItem("login"));
-  console.log(localStorage.getItem("accessToken"));
 };
 
 export const logOut = () => {
-  localStorage.setItem("accessToken", "");
   localStorage.setItem("login", "false");
 };

@@ -12,11 +12,16 @@
     let userid = e.target.id.value;
     let userpassword = e.target.pwd1.value;
     let url = serverhost + "/api/user/login";
-    let data = await axios({ method: "post", url: url, params: { userid: userid, userpassword: userpassword } });
+    let data = await axios({
+      method: "post",
+      url: url,
+      params: { userid: userid, userpassword: userpassword },
+      withCredentials: true,
+    });
+    console.log(data);
     if (data.data) {
-      localStorage.setItem("accessToken", data.data);
       localStorage.setItem("login", "true");
-      location.href = "/";
+      /* location.href = "/"; */
     } else {
       alert("계정 및 비밀번호가 맞지 않습니다");
     }

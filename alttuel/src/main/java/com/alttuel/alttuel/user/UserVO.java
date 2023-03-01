@@ -11,7 +11,7 @@ public class UserVO {
     private String userid;
     private String userpassword;
     private String email;
-    private String algorithm;
+    private Integer authority;
 
     /*
      * public String getuserid() {
