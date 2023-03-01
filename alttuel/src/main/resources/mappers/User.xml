@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alttuel.alttuel.user.UserDAO">
+   <select id="UserExist" resultType="boolean">
+      select      if(count(userid)=1,1,0)
+      FROM        accountuser
+      where       userid = '${userid}'
+   </select> 
+   <select id="getPassword" resultType="String">
+      select      userpassword
+      FROM        accountuser
+      where       userid = '${userid}'
+   </select>
+   <insert id="createUser" >
+      insert into      accountuser(userid, userpassword, useremail, algorithm)
+      values      ('${userid}','${userpassword}','${email}','${algorithm}')
+   </insert>
+
+
+</mapper>

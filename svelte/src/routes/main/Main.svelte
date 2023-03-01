@@ -1,8 +1,12 @@
 <script>
   import Mainitem from "./Mainitem.svelte";
   import axios from "axios";
-  import { serverhost } from "../../Store";
+  import { serverhost, isLogincookie } from "../../Store";
+  import { onMount } from "svelte";
 
+  onMount(() => {
+    isLogincookie();
+  });
   $: size = 1000;
   $: page = 0;
   $: api = serverhost + "/api/alttuel/list";

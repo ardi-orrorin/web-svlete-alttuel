@@ -1,19 +1,31 @@
 <script>
   import axios from "axios";
-  import { serverhost, isLogin } from "../../Store";
+  import { onMount } from "svelte";
+  import { serverhost, isLogincookie } from "../../Store";
   const items = ["id", "pwd1"];
 
-  const newaccount = (e) => {
-    let url = serverhost;
-    let data = { userid: e.target.id.value, password: e.target.pwd.value };
-    axios({ method: "post", url: url, data: JSON.stringify(data) });
-    $isLogin = true;
+  onMount(async () => {
+    isLogincookie();
+  });
+
+  const login = async (e) => {
+    let userid = e.target.id.value;
+    let userpassword = e.target.pwd1.value;
+    let url = serverhost + "/api/user/login";
+    let data = await axios({ method: "post", url: url, params: { userid: userid, userpassword: userpassword } });
+    if (data.data) {
+      localStorage.setItem("accessToken", data.data);
+      localStorage.setItem("login", "true");
+      location.href = "/";
+    } else {
+      alert("계정 및 비밀번호가 맞지 않습니다");
+    }
   };
 </script>
 
 <div class="main">
   <div class="w800px">
-    <form action="submit" on:submit={(e) => newaccount(e)}>
+    <form action="submit" on:submit|preventDefault={(e) => login(e)}>
       <div class="d-flex justify-content-center mb-5">
         <h1 class="letterspacing-03em">- SIGN UP -</h1>
       </div>

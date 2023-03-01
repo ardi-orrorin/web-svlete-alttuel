@@ -1,7 +1,7 @@
 <script>
   import axios from "axios";
   import { onMount } from "svelte";
-  import { ismainmenu, issubmenu, serverhost, life } from "../../../Store";
+  import { ismainmenu, issubmenu, serverhost } from "../../../Store";
 
   const items = ["site", "domain", "path", "memo"];
   onMount(() => {

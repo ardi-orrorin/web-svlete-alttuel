@@ -3,7 +3,13 @@
   import Routes from "svelte-spa-router";
   import Submenu from "../menu/Submenu.svelte";
   import Newsitelist from "./sitelist/Newsitelist.svelte";
-  import { issubmenu } from "../../Store";
+  import { issubmenu, isLoginerr, isLogincookie } from "../../Store";
+  import { onMount } from "svelte";
+
+  onMount(() => {
+    isLogincookie();
+    isLoginerr();
+  });
 
   const routes = {
     "/admin/sitelist": Sitelist,
