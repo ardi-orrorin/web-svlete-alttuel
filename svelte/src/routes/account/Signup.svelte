@@ -1,18 +1,31 @@
 <script>
   import axios from "axios";
-  import { serverhost } from "../../Store";
+  import { serverhost, isLogin } from "../../Store";
   const items = ["id", "email", "pwd1", "pwd2"];
 
-  const newaccount = (e) => {
-    let url = serverhost;
-    let data = { userid: e.target.id.value, password: e.target.pwd.value, email: e.target.email.value };
-    axios({ method: "post", url: url, data: JSON.stringify(data) });
+  const newaccount = async (e) => {
+    let url = serverhost + "/api/user/new";
+    let data = {
+      id: 0,
+      userid: e.target.id.value,
+      userpassword: e.target.pwd1.value,
+      useremail: e.target.email.value,
+      authority: 9,
+    };
+    let res = await axios({
+      method: "post",
+      url: url,
+      data: data,
+      withCredentials: true,
+    });
+    isLogin.set(true);
+    location.href = "#/";
   };
 </script>
 
 <div class="main">
   <div class="w800px">
-    <form action="submit" on:submit={(e) => newaccount(e)}>
+    <form action="submit" on:submit|preventDefault={(e) => newaccount(e)}>
       <div class="d-flex justify-content-center mb-5">
         <h1 class="letterspacing-03em">- SIGN UP -</h1>
       </div>

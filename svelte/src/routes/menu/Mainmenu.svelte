@@ -1,6 +1,6 @@
 <script>
   import Mainmenuitem from "./Mainmenuitem.svelte";
-  import { isLogincookie, logOut } from "../../Store";
+  import { isLogincookie, logOut, isLogin } from "../../Store";
   import { onMount } from "svelte";
 
   onMount(() => {
@@ -18,18 +18,18 @@
     {#each menulist as menu}
       <Mainmenuitem name={menu.name} link={menu.link} />
     {/each}
-    {#if localStorage.getItem("login") === "true"}
+    {#if $isLogin === true}
       <Mainmenuitem name="ADMIN" link="#/admin" />
       <div
         on:click={() => {
           logOut();
-          location.href = "/";
         }}
       >
         <Mainmenuitem name="LOGOUT" link="#/" />
       </div>
     {:else}
       <Mainmenuitem name="LOGIN" link="#/account/signin" />
+      <Mainmenuitem name="SIGNUP" link="#/account/signUp" />
     {/if}
     <div>
       <!-- <input type="button" value="loginswitch" on:click={() => loginswicth()} /> -->

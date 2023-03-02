@@ -10,7 +10,7 @@ public class UserVO {
     private Integer id;
     private String userid;
     private String userpassword;
-    private String email;
+    private String useremail;
     private Integer authority;
 
     /*

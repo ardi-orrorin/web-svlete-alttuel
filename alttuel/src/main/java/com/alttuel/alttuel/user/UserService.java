@@ -1,5 +1,6 @@
 package com.alttuel.alttuel.user;
 
+import jakarta.servlet.http.Cookie;
 import java.util.Optional;
 
 public interface UserService {
@@ -10,4 +11,6 @@ public interface UserService {
     String getPassword(String userid);
 
     void createUser(UserVO user);
+
+    Cookie getCookie(String key, String value, Integer time);
 }

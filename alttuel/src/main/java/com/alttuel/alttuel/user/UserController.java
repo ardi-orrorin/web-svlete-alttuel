@@ -1,6 +1,7 @@
 package com.alttuel.alttuel.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,8 +13,8 @@ import com.alttuel.alttuel.config.Token.JwtTokenProvider;
 
 import io.lettuce.core.dynamic.annotation.Param;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(path = "/api/user")
@@ -31,52 +32,53 @@ public class UserController {
         boolean existuser = userServiceImpl.existUser(userid, userpassword);
 
         if (existuser) {
-
-            Cookie cookie1 = new Cookie("cookie",
-                    String.valueOf(jwtTokenProvider.createToken(userid, userpassword)));
-            cookie1.setPath("/");
-            cookie1.setDomain("localhost");
-            cookie1.setHttpOnly(true);
-            cookie1.setSecure(true);
-            cookie1.setMaxAge(5 * 60 * 60);
-
-            response.addCookie(cookie1);
-
-            return "true1";
-        } else {
-            return "false1";
-        }
-
-    }
-
-    @PostMapping(path = "/logincookie")
-    public String logincookie(@CookieValue("cookie") String cookie, HttpServletResponse response) {
-        try {
-            String userid = jwtTokenProvider.getUser(cookie);
-            userServiceImpl.UserExist(userid);
-
-            Cookie cookie1 = new Cookie("cookie",
-                    String.valueOf(jwtTokenProvider.createToken(userid, userServiceImpl.getPassword(userid))));
-            cookie1.setPath("/");
-            cookie1.setDomain("localhost");
-            cookie1.setHttpOnly(true);
-            cookie1.setSecure(true);
-            cookie1.setMaxAge(5 * 60 * 60);
-
-            response.addCookie(cookie1);
-
+            Cookie newcookie = userServiceImpl.getCookie("cookie",
+                    String.valueOf(jwtTokenProvider.createToken(userid, userpassword)), 5 * 60 * 60);
+            response.addCookie(newcookie);
             return "true";
-
-        } catch (Exception e) {
+        } else {
             return "false";
         }
 
     }
 
-    @PostMapping(path = "/new")
-    public String createUser(@RequestBody UserVO user) {
-        userServiceImpl.createUser(user);
-        return jwtTokenProvider.createToken(user.getUserid(), user.getUserpassword());
+    @PostMapping(path = "/logincookie")
+    public String logincookie(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            Cookie[] cookies = request.getCookies();
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("cookie")) {
+                    String userid = jwtTokenProvider.getUser(cookie.getValue());
+                    userServiceImpl.UserExist(userid);
+                    Cookie newcookie = userServiceImpl.getCookie("cookie",
+                            String.valueOf(
+                                    jwtTokenProvider
+                                            .createToken(
+                                                    userid,
+                                                    userServiceImpl.getPassword(userid))),
+                            5 * 60 * 60);
+                    response.addCookie(newcookie);
+                    return "true";
+                }
+            }
+            return "false";
+        } catch (Exception e) {
+            return "false";
+        }
+    }
 
+    @PostMapping(path = "/new")
+    public String createUser(@RequestBody UserVO user, HttpServletResponse response) {
+        userServiceImpl.createUser(user);
+        String token = jwtTokenProvider.createToken(user.getUserid(), user.getUserpassword());
+        Cookie cookie = userServiceImpl.getCookie("cookie", token, 5 * 60 * 60);
+        response.addCookie(cookie);
+        return "true";
+    }
+
+    @PostMapping(path = "/logout")
+    public void removecookie(@CookieValue("cookie") String cookie, HttpServletResponse response) {
+        Cookie newcookie = userServiceImpl.removeCookie("cookie", null);
+        response.addCookie(newcookie);
     }
 }

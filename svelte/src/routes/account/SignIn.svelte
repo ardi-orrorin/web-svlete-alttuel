@@ -5,7 +5,7 @@
   const items = ["id", "pwd1"];
 
   onMount(async () => {
-    isLogincookie();
+    /* isLogincookie(); */
   });
 
   const login = async (e) => {
@@ -18,10 +18,10 @@
       params: { userid: userid, userpassword: userpassword },
       withCredentials: true,
     });
-    console.log(data);
+
     if (data.data) {
       localStorage.setItem("login", "true");
-      /* location.href = "/"; */
+      location.href = "/";
     } else {
       alert("계정 및 비밀번호가 맞지 않습니다");
     }
