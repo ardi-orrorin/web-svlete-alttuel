@@ -1,0 +1,47 @@
+#!bin/bash
+
+list="springboot svelte crawlling"
+
+if [ $1 == "help" ] || [ $1 =="-help" ];then
+    echo "-build  docker -build version | ex) docker -build 0.0.1"
+    echo "-update docker image update"
+    echo "-list docker image list"
+    echo "-rma docker image remove"
+    echo "-compose"
+fi
+
+
+if [ $1 == "-build" ];then
+    for item in $list
+    do
+        docker build -t $item:$2 -f Dockerfile-$item .
+    done
+fi
+
+
+if [ $1 == "-update" ];then
+    for item in $list
+    do
+        docker build -t $item:$2 -f Dockerfile-$item-update .
+    done
+fi
+
+
+if [ $1 == "-list" ];then
+    for item in $list
+    do
+        docker image ls $item
+    done
+fi
+
+if [ $1 == "-rma" ];then
+for item in $list
+    do
+        docker image rm -f $(docker image ls $item)
+    done
+    
+fi
+
+if [ $1 == "-compose" ];then
+    docker stack deploy -c Docker-compose.yml webservice
+fi
