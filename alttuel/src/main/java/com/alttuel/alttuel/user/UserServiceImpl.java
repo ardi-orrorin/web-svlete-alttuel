@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.alttuel.alttuel.config.Token.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Value;
+
 import jakarta.servlet.http.Cookie;
 
 @Service
@@ -21,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     JwtTokenProvider jwtTokenProvider;
+
+    @Value("${server.domain}")
+    private String domain;
 
     @Override
     public Optional<UserVO> findUserByUsername(String userid) {
@@ -54,11 +59,12 @@ public class UserServiceImpl implements UserService {
     }
 
     public Cookie getCookie(String key, String value, Integer time) {
+
         Cookie newCookie = new Cookie(key, value);
         newCookie.setPath("/");
-        newCookie.setDomain("localhost");
-        newCookie.setHttpOnly(true);
-        newCookie.setSecure(true);
+        newCookie.setDomain(domain);
+        newCookie.setHttpOnly(false);
+        newCookie.setSecure(false);
         newCookie.setMaxAge(time);
         return newCookie;
     };

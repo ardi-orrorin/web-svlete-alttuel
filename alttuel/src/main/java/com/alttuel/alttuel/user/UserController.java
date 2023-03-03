@@ -1,7 +1,7 @@
 package com.alttuel.alttuel.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +25,9 @@ public class UserController {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Value("${jwt.token-validity-in-seconds}")
+    private Integer time;
 
     @PostMapping(path = "/login")
     public String login(@Param(value = "userid") String userid, @Param(value = "userpassword") String userpassword,
@@ -56,7 +59,7 @@ public class UserController {
                                             .createToken(
                                                     userid,
                                                     userServiceImpl.getPassword(userid))),
-                            5 * 60 * 60);
+                            time * 60);
                     response.addCookie(newcookie);
                     return "true";
                 }
@@ -71,7 +74,7 @@ public class UserController {
     public String createUser(@RequestBody UserVO user, HttpServletResponse response) {
         userServiceImpl.createUser(user);
         String token = jwtTokenProvider.createToken(user.getUserid(), user.getUserpassword());
-        Cookie cookie = userServiceImpl.getCookie("cookie", token, 5 * 60 * 60);
+        Cookie cookie = userServiceImpl.getCookie("cookie", token, time * 60);
         response.addCookie(cookie);
         return "true";
     }

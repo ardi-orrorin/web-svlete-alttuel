@@ -1,12 +1,8 @@
 <script>
   import axios from "axios";
   import { onMount } from "svelte";
-  import { serverhost, isLogincookie } from "../../Store";
+  import { serverhost } from "../../Store";
   const items = ["id", "pwd1"];
-
-  onMount(async () => {
-    /* isLogincookie(); */
-  });
 
   const login = async (e) => {
     let userid = e.target.id.value;

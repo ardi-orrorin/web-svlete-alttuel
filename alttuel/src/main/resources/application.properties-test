@@ -1,0 +1,37 @@
+#SERVER SETTING
+server.protocol=http
+server.fontport=8080
+server.domain=localhost
+server.port=9000
+
+
+# DATABASE
+spring.datasource.url=jdbc:mariadb://tysct.kr:3306/altteul
+spring.datasource.driverClassName=org.mariadb.jdbc.Driver
+spring.datasource.username=webroot
+spring.datasource.password=SC*750(synol
+
+
+# VO location
+mybatis.type-aliases-package=com.alttuel.alttuel
+
+# XML location
+mybatis.mapper-locations=classpath:mappers/*.xml
+
+
+#jwt INFO
+jwt.secret=VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+jwt.header=Authorization
+jwt.token-validity-in-seconds=300
+
+
+
+
+
+
+#spring.jpa.hibernate.ddl-auto=update
+#spring.datasource.url=jdbc:mariadb://tysct.kr:3306/springboot
+#spring.datasource.username=webroot
+#spring.datasource.password=SC*750(synol
+#spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+#spring.jpa.show-sql: true

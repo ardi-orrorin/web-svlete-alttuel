@@ -28,6 +28,7 @@ public class JwtTokenProvider {
 
     @Value("${jwt.token-validity-in-seconds}")
     private long tokenValidTime;
+
     private final UserDetailsService userDetailsService;
 
     @PostConstruct

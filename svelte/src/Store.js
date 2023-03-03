@@ -1,7 +1,7 @@
 import { writable, get } from "svelte/store";
 import axios from "axios";
 
-export const host = "localhost";
+export const host = "192.168.0.49";
 export const protocol = "http";
 export const port = "9000";
 export const wsprotocal = "ws";

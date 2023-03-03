@@ -1,5 +1,6 @@
 package com.alttuel.alttuel.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,15 +14,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+    @Value("${server.domain}")
+    private String domain;
+
+    @Value("${server.fontport}")
+    private String fontport;
+
+    @Value("${server.protocol}")
+    private String protocol;
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8080")
+                .allowedOrigins(protocol + "://" + domain + ":" + fontport)
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .allowCredentials(true)
                 .maxAge(3000);
-        ;
     }
 
     @Bean

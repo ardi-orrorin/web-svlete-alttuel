@@ -31,7 +31,10 @@ async def ruliweb() -> list:
                 html = req.text
                 soup = bs(html, 'html.parser')
                 text = soup.select_one('a.img_load > img')
-                itemlist['boardthumnail'] = text.attrs['src']
+                try:
+                    itemlist['boardthumnail'] = text.attrs['src']
+                except AttributeError:
+                    itemlist['boardthumnail'] = ""
             else:
                 itemlist['boardthumnail'] = ""
 
