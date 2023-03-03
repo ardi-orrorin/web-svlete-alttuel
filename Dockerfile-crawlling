@@ -6,5 +6,6 @@ COPY ./crawlling /app
 
 RUN apt update
 RUN pip install -r piplist.txt
+ENV TZ Asia/Seoul
 
 ENTRYPOINT python3 crawlling-start.py
