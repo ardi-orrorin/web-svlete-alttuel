@@ -1,9 +1,9 @@
 package com.alttuel.alttuel.config.Token;
 
-import java.io.StringReader;
 import java.util.Base64;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,9 +22,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Component
 public class JwtTokenProvider {
-    private String secretkey = "5b0XoICH7EVxlK/CDmCp5Jyi2LD8JHYUFTNpC+zflUo=";
 
-    private long tokenValidTime = 1 * 60 * 1000L;
+    @Value("${jwt.secret}")
+    private String secretkey;
+
+    @Value("${jwt.token-validity-in-seconds}")
+    private long tokenValidTime;
     private final UserDetailsService userDetailsService;
 
     @PostConstruct
@@ -41,7 +44,7 @@ public class JwtTokenProvider {
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .signWith(SignatureAlgorithm.HS256, secretkey)
-                .setExpiration(new Date(now.getTime() + tokenValidTime))
+                .setExpiration(new Date(now.getTime() + (tokenValidTime * 1000)))
                 .compact();
 
     }

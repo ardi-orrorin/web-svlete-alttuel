@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const host = "localhost";
 export const protocol = "http";
-export const port = "8000";
+export const port = "9000";
 export const wsprotocal = "ws";
 export const serverhost = protocol + "://" + host + ":" + port;
 export const ismainmenu = writable(true);
@@ -18,16 +18,16 @@ export const isLogincookie = async () => {
     withCredentials: true,
   });
   isLogin.set(true);
-  console.log(data);
   if (!data.data) {
     location.href = "#/account/signin";
     isLogin.set(false);
   }
 };
 
-export const logOut = () => {
+export const logOut = async () => {
   let url = serverhost + "/api/user/logout";
-  let data = axios({ method: "post", url: url, withCredentials: true });
+  await axios({ method: "post", url: url, withCredentials: true });
   isLogin.set(false);
   location.href = "#/";
+  location.reload();
 };

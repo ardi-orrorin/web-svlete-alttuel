@@ -38,4 +38,5 @@ async def ppomppu() -> list:
             result.append(itemlist)
         else:
             pass
+    
     return result[0:len(result)-7]

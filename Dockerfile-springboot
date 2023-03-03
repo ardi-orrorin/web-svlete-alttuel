@@ -1,0 +1,8 @@
+FROM openjdk:21-jdk-slim-buster
+
+WORKDIR /app/springboot
+
+ARG JAR_FILE_PATH=./alttuel/build/libs/*.jar
+COPY ${JAR_FILE_PATH} /app/springboot/app.jar
+
+ENTRYPOINT  java -jar /app/springboot/app.jar

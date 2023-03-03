@@ -11,7 +11,7 @@
                   si.boardpath as siteboardpath
       FROM        sitelist as sl
       INNER JOIN  siteinfo as si ON si.id = sl.site
-      ORDER BY    sl.createdate desc
+      ORDER BY    sl.id desc
       LIMIT       ${size}
       OFFSET      ${page}
       

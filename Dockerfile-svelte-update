@@ -1,0 +1,5 @@
+FROM svelte:0.0.1
+
+COPY  ./svelte/public /usr/share/nginx/html
+COPY  ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY  ./nginx/nginx.conf /etc/nginx/nginx.conf

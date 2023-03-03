@@ -7,7 +7,7 @@ mysql = mySQL()
 
 
 async def loop():
-    def_list = [clien, ppomppu, quasarzone]
+    def_list = [clien, ppomppu, quasarzone, ruliweb]
 
     while True:
         result = []

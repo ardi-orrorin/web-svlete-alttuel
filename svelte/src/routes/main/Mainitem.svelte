@@ -1,11 +1,14 @@
 <script>
   export let item;
   import moment from "moment/min/moment-with-locales";
+  console.log(item.boardthumnail);
 </script>
 
 <table>
   <tr>
-    <td class="thumnail"><img src={item.boardthumnail} onerror="this.src={item.boardthumnail}" /></td>
+    <td class="thumnail"
+      ><img referrerpolicy="no-referrer" src={item.boardthumnail} onerror="this.src='./images/notimg.png';" /></td
+    >
     <td class="context">
       <div><span class="label"> {item.sitename} </span></div>
       <p />
@@ -63,5 +66,6 @@
     width: 150px;
     height: 150px;
     display: block;
+    object-fit: cover;
   }
 </style>

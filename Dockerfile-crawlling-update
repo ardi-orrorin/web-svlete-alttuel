@@ -1,0 +1,10 @@
+FROM crawlling:0.0.1
+
+WORKDIR /app
+
+COPY ./crawlling /app
+
+RUN apt update
+RUN pip install -r piplist.txt
+
+ENTRYPOINT python3 crawlling-start.py

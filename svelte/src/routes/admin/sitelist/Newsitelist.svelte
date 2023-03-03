@@ -1,12 +1,13 @@
 <script>
   import axios from "axios";
   import { onMount } from "svelte";
-  import { ismainmenu, issubmenu, serverhost } from "../../../Store";
+  import { ismainmenu, issubmenu, serverhost, isLogincookie } from "../../../Store";
 
   const items = ["site", "domain", "path", "memo"];
   onMount(() => {
     $ismainmenu = false;
     $issubmenu = false;
+    isLogincookie();
   });
 
   const newsite = async (e) => {

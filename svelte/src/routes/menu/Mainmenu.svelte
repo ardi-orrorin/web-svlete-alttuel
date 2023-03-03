@@ -21,7 +21,7 @@
     {#if $isLogin === true}
       <Mainmenuitem name="ADMIN" link="#/admin" />
       <div
-        on:click={() => {
+        on:click|preventDefault={() => {
           logOut();
         }}
       >

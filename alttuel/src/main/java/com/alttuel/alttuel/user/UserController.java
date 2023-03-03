@@ -80,5 +80,6 @@ public class UserController {
     public void removecookie(@CookieValue("cookie") String cookie, HttpServletResponse response) {
         Cookie newcookie = userServiceImpl.removeCookie("cookie", null);
         response.addCookie(newcookie);
+
     }
 }
