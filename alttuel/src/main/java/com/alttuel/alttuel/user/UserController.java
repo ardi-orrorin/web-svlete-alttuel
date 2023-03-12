@@ -14,7 +14,6 @@ import com.alttuel.alttuel.config.Token.JwtTokenProvider;
 import io.lettuce.core.dynamic.annotation.Param;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
