@@ -3,6 +3,7 @@ package com.alttuel.alttuel.config.Token;
 import java.util.Base64;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,9 +18,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Component
 public class JwtTokenProvider {
 
@@ -29,7 +28,8 @@ public class JwtTokenProvider {
     @Value("${jwt.token-validity-in-seconds}")
     private long tokenValidTime;
 
-    private final UserDetailsService userDetailsService;
+    @Autowired
+    UserDetailsService userDetailsService;
 
     @PostConstruct
     protected void init() {
@@ -39,7 +39,7 @@ public class JwtTokenProvider {
 
     public String createToken(String userid, String userpassword) {
         Claims claims = Jwts.claims().setSubject(userid);
-        claims.put("userpassword", userpassword);
+        claims.put("userid", userid);
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims)

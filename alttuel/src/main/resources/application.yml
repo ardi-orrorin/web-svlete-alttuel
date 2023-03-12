@@ -1,0 +1,53 @@
+#SERVER SETTING
+server:
+    protocol: https
+    frontport: 8080
+    domain: 192.168.0.49
+    port: 9000
+
+logging:
+    file:
+        path:
+        name:
+        max-history:
+        max-szie:
+        total-size-cap:
+    pattern:
+        console:
+        file:
+        level:
+
+
+# DATABASE
+spring:
+    datasource:
+        url: jdbc:mariadb://tysct.kr:3306/altteul
+        driverClassName: org.mariadb.jdbc.Driver
+        username: webroot
+        password: SC*750(synol
+
+
+
+
+mybatis:
+    type-aliases-package: com.alttuel.alttuel # VO location
+    mapper-locations: classpath:mappers/*.xml #XML location
+
+#jwt INFO
+jwt:
+    secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+    header: Authorization
+    token-validity-in-seconds: 300
+    
+
+
+
+
+
+
+#spring.jpa.hibernate.ddl-auto=update
+#spring.datasource.url=jdbc:mariadb://tysct.kr:3306/springboot
+#spring.datasource.username=webroot
+#spring.datasource.password=SC*750(synol
+#spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+#spring.jpa.show-sql: true

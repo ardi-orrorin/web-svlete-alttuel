@@ -17,8 +17,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${server.domain}")
     private String domain;
 
-    @Value("${server.fontport}")
-    private String fontport;
+    @Value("${server.frontport}")
+    private String frontport;
 
     @Value("${server.protocol}")
     private String protocol;
@@ -26,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins(protocol + "://" + domain + ":" + fontport)
+                .allowedOrigins(protocol + "://" + domain + ":" + frontport)
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .allowCredentials(true)
