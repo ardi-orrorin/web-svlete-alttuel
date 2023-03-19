@@ -22,6 +22,7 @@ public class AlttuelsiteController {
             @RequestParam(value = "page") Integer page) {
 
         List<AlttuelsiteVO> AlttuelList = alttuelsiteServiceImpl.getAlttuelList(size, page);
+
         return AlttuelList;
     }
 }
