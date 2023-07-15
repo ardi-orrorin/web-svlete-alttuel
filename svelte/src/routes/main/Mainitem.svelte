@@ -1,7 +1,8 @@
 <script>
   export let item;
   import moment from "moment/min/moment-with-locales";
-  console.log(item.boardthumnail);
+  moment.locale("ko");
+  item.createdate[1] = item.createdate[1] - 1; //날짜 한달 차이  api서버 자바스크립 차이 교정
 </script>
 
 <table>

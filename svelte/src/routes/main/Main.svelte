@@ -7,7 +7,7 @@
   onMount(() => {
     isLogincookie();
   });
-  $: size = 20;
+  $: size = 200;
   $: page = 0;
   $: api = serverhost + "/api/alttuel/list";
   $: data = axios({ method: "get", url: api, params: { size: size, page: page } });
